@@ -1,0 +1,175 @@
+﻿@inject SignInManager<RayaUser> signManger
+@{
+    ViewData["Title"] = "Employees";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model EmployeeVM
+@{
+    int count = 0;
+}
+
+<h1 >Employees </h1>
+<div id="panner" class="row">
+   <img src="~/images/raya.png" width="100%" height="300px" />
+ 
+</div>
+<div class="container">
+    <form asp-action="Filter" asp-controller="Employee" method="post">
+        <div class="row">
+            <div class="form-group col-3">
+                <label asp-for="Name"></label>
+                <input type="text" id="name" asp-for="Name" class="form-control" />
+            </div>
+            <div class="form-group col-3">
+                <label asp-for="Salary"></label>
+                <input type="number" id="salary" asp-for="Salary" class="form-control" />
+            </div>
+            <div class="form-group col-3">
+                <label asp-for="Email"></label>
+                <input type="text" id="salary" asp-for="Email" class="form-control" />
+            </div>
+            <div class="col-3">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+       
+    </form>
+   <br /><br />
+    <table class="table table-bordered">
+        <thead>
+            <tr class="table-dark">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Salary</th>
+            <th>Job Description</th>
+            <th>status</th>
+            <th>IsApproved</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tr>
+        <tr>
+            <td></td>
+            <td><input id="NameNew" placeholder="Name" onkeypress="handleKeyPressNew(event)" /></td>
+            <td><input id="EmailNew" type="email" placeholder="Email" onkeypress="handleKeyPressNew(event)" /></td>
+            <td><input id="SalaryNew" type="number" placeholder="Salary" onkeypress="handleKeyPressNew(event)" /></td>
+            <td><input id="JobNew" placeholder="Job" onkeypress="handleKeyPressNew(event)" /></td>
+            <td></td>
+            <td></td>
+        </tr>
+            @if (signManger.IsSignedIn(User) && User.IsInRole("HRAdmin"))
+            {
+                @foreach (var employee in ViewBag.Employees)
+                {
+                
+                    <tr>
+                        <td><input name="ID" value="@employee.Id" readonly /></td>
+                        <td><input name="Name" value="@employee.Name" onkeypress="handleKeyPress(event, @employee.Id,@count)" /></td>
+                        <td><input name="Email" value="@employee.Email" onkeypress="handleKeyPress(event, @employee.Id,@count)" /></td>
+                        <td><input name="Salary" value="@employee.Salary" onkeypress="handleKeyPress(event, @employee.Id),@count" /></td>
+                        <td><input name="Job" value="@employee.Job" onkeypress="handleKeyPress(event, @employee.Id,@count)" /></td>
+
+                        @{
+                            if (employee.IsApproved)
+                            {
+                                <td>Approved</td>
+                            }
+                            else
+                            {
+                                <td>Pinned</td>
+                            }
+
+                        }
+
+                        <td>
+                            <select name="IsApproved" class="form-select" onchange="updateEmployee(@employee.Id,@count)">
+                                <option value="1">Approved</option>
+                                <option selected value="0">Pinned</option>
+                            </select>
+                        </td>  
+
+                        <td>
+                            <button type="button" class="btn btn-danger" onclick="AssignId(@employee.Id)" data-bs-toggle="modal"  data-bs-target="#myModal">
+                                Delete
+                            </button>
+                        </td>
+
+                    </tr>
+                    count++;
+                }
+            }
+            else
+            {
+                @foreach (var employee in ViewBag.Employees)
+                {
+
+                <tr>
+                    <td><input name="ID" value="@employee.Id" readonly /></td>
+                    <td><input name="Name" value="@employee.Name" onkeypress="handleKeyPress(event, @employee.Id,@count)" readonly /></td>
+                    <td><input name="Email" value="@employee.Email" onkeypress="handleKeyPress(event, @employee.Id,@count)" readonly /></td>
+                    <td><input name="Salary" value="@employee.Salary" onkeypress="handleKeyPress(event, @employee.Id),@count" readonly /></td>
+                    <td><input name="Job" value="@employee.Job" onkeypress="handleKeyPress(event, @employee.Id,@count)" readonly /></td>
+
+                        @{if (employee.IsApproved)
+                            {
+                            <td>Approved</td>
+                            }
+                            else
+                            {
+                            <td>Pinned</td>
+                            }
+
+                        }
+
+                    <td>
+                        <select name="IsApproved" class="form-select" onchange="updateEmployee(@employee.Id,@count)" disabled>
+                            <option value="1">Approved</option>
+                            <option selected value="0">Pinned</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" onclick="AssignId(@employee.Id)" data-bs-toggle="modal" data-bs-target="#myModal" disabled>
+                            Delete
+                        </button>
+                    </td>
+
+                </tr>
+                    count++;
+                }
+            }
+    </table>
+
+</div>
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Attention</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                Are You sure to delete this Employee?!
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" onclick="DeleteEmp()">Delete</button>
+
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+<script src="~/handleKeyPress.js"></script>
+<script src="~/addEmp.js"></script>
+<script src="~/DeleteEmp.js"></script>

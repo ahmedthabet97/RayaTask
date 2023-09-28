@@ -1,0 +1,17 @@
+C:\Users\pc\source\repos\RayaTask\TaskContext\bin\Debug\net7.0\TaskContext.deps.json
+C:\Users\pc\source\repos\RayaTask\TaskContext\bin\Debug\net7.0\TaskContext.runtimeconfig.json
+C:\Users\pc\source\repos\RayaTask\TaskContext\bin\Debug\net7.0\TaskContext.dll
+C:\Users\pc\source\repos\RayaTask\TaskContext\bin\Debug\net7.0\TaskContext.pdb
+C:\Users\pc\source\repos\RayaTask\TaskContext\bin\Debug\net7.0\Domain.dll
+C:\Users\pc\source\repos\RayaTask\TaskContext\bin\Debug\net7.0\Domain.pdb
+C:\Users\pc\source\repos\RayaTask\TaskContext\obj\Debug\net7.0\TaskContext.csproj.AssemblyReference.cache
+C:\Users\pc\source\repos\RayaTask\TaskContext\obj\Debug\net7.0\TaskContext.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pc\source\repos\RayaTask\TaskContext\obj\Debug\net7.0\TaskContext.AssemblyInfoInputs.cache
+C:\Users\pc\source\repos\RayaTask\TaskContext\obj\Debug\net7.0\TaskContext.AssemblyInfo.cs
+C:\Users\pc\source\repos\RayaTask\TaskContext\obj\Debug\net7.0\TaskContext.csproj.CoreCompileInputs.cache
+C:\Users\pc\source\repos\RayaTask\TaskContext\obj\Debug\net7.0\TaskContext.csproj.CopyComplete
+C:\Users\pc\source\repos\RayaTask\TaskContext\obj\Debug\net7.0\TaskContext.dll
+C:\Users\pc\source\repos\RayaTask\TaskContext\obj\Debug\net7.0\refint\TaskContext.dll
+C:\Users\pc\source\repos\RayaTask\TaskContext\obj\Debug\net7.0\TaskContext.pdb
+C:\Users\pc\source\repos\RayaTask\TaskContext\obj\Debug\net7.0\TaskContext.genruntimeconfig.cache
+C:\Users\pc\source\repos\RayaTask\TaskContext\obj\Debug\net7.0\ref\TaskContext.dll
